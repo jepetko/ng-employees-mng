@@ -6,6 +6,6 @@ RSpec.describe Department, :type => :model do
   end
 
   it 'should have a name' do
-    @dep.should respond_to(:name)
+    expect(@dep).to respond_to(:name)
   end
 end
