@@ -12,7 +12,7 @@
         .controller('EmployeesCtrl', ['$scope', 'RestService', function($scope, RestService) {
             $scope.employees = [];
             $scope.record = {};
-            $scope.template = { url : '../../templates/employees_form.html'};
+            $scope.template = { url : '/assets/employees_form.html'};
 
             $scope.init = function() {
                 RestService.query(function(data) {
