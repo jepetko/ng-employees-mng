@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'EmployeesController' do
+describe EmployeesController do
   render_views
 
   before(:each) do
@@ -29,6 +29,18 @@ describe 'EmployeesController' do
     end
     it 'doesn\'t route to #edit' do
       expect({get: "employees/#{@employees.first.id}/edit"}).not_to be_routable
+    end
+  end
+
+  describe 'get #index' do
+    before(:each) do
+      request.env['HTTP_ACCEPT'] = 'application/json'
+    end
+
+    it 'is successful' do
+      get :index, :format => 'json'
+
+      parse_index_json_and_check_it :Employee, response
     end
   end
 

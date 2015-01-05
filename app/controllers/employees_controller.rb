@@ -1,5 +1,9 @@
 class EmployeesController < ApplicationController
   def index
+    all = Employee.all
+    respond_to do |format|
+      format.json { render json: all.to_json }
+    end
   end
 
   def show

@@ -24,13 +24,7 @@ describe DepartmentsController do
 
     it 'is successful' do
       get :index, :format => 'json'
-
-      body = response.body
-      body =~ /^\[(.*)\]$/
-      json = ActiveSupport::JSON.decode(body)
-      expect(json).to be_a(Array)
-
-      expect(json.length).to eq( Department.all.count )
+      parse_index_json_and_check_it :Department, response
     end
   end
 
