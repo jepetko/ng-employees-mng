@@ -17,3 +17,13 @@ $ rails_apps_composer new . -r core
 ```
 
 ## create model and controller
+
+```
+bundle exec rails g model Employee name surname ranking:integer department_id:integer
+```
+
+### example for create controller
+
+```
+bundle exec rails g controller Employees index show new create edit update destroy
+```
