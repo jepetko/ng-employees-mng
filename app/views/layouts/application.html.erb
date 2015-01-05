@@ -5,7 +5,12 @@
     <title><%= content_for?(:title) ? yield(:title) : "Ng Employees Mng" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Ng Employees Mng" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <%= javascript_include_tag 'angular/angular.min' %>
+    <%= javascript_include_tag 'angular/angular-resource.min' %>
+    <%= javascript_include_tag 'employees/EmployeesMng' %>
+    <%= javascript_include_tag 'application' %>
+
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -15,6 +20,18 @@
     <main role="main">
        <%= render 'layouts/messages' %>
        <%= yield %>
+
+      <div data-ng-app="ng-employees-mng" data-ng-controller="EmployeesCtrl">
+        <div id="all">
+          <table>
+            <tr data-ng-repeat="e in employees">
+              <td>{{e.name}}</td>
+              <td><button data-ng-click="get(e.id)">Get</button></td>
+            </tr>
+          </table>
+        </div>
+        <div id="form" ng-include="template.url"></div>
+      </div>
     </main>
   </body>
 </html>
