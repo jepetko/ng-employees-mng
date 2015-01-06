@@ -2,6 +2,11 @@
     "use strict";
 
     angular.module('ng-employees-mng', ['ngResource'])
+        .run(['$http', function($http) {
+
+            var token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
+            $http.defaults.headers.common['X-CSRF-Token'] = token;
+        }])
         .service('RestService', ['$resource', function($resource) {
             return $resource('/employees/:id.json', null, {
                 update : {
@@ -24,12 +29,21 @@
                 $scope.record = RestService.get({id: id});
             };
 
-            $scope.update = function(data) {
-                if(!data) {
-                    $scope.record = RestService.update({id: $scope.record.id}, $scope.record);
+            $scope.action = function() {
+                if($scope.record && $scope.record.id && $scope.record.id > 0) {
+                    $scope.update();
                 } else {
-                    $scope.record = RestService.update({id : data.id}, data);
+                    $scope.insert();
                 }
+            };
+
+            $scope.update = function() {
+                $scope.record = RestService.update({id : $scope.record.id}, $scope.record);
+                $scope.init();
+            };
+
+            $scope.insert = function() {
+                $scope.record = RestService.save($scope.record);
                 $scope.init();
             };
 

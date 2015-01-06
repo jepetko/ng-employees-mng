@@ -13,6 +13,7 @@ class EmployeesController < ApplicationController
   end
 
   def create
+    employee = Employee.new params
   end
 
   def edit

@@ -32,16 +32,26 @@ describe EmployeesController do
     end
   end
 
-  describe 'get #index' do
+  context 'CRUD operations' do
     before(:each) do
       request.env['HTTP_ACCEPT'] = 'application/json'
     end
 
-    it 'is successful' do
-      get :index, :format => 'json'
+    describe 'get #index' do
+      it 'is successful' do
+        get :index, :format => 'json'
+        parse_index_json_and_check_it :Employee, response
+      end
+    end
 
-      parse_index_json_and_check_it :Employee, response
+    describe 'post #create' do
+      it 'is successful' do
+        new_employee = {name: 'Lara', surname: 'Larsson', department: 'IT', ranking: 100}
+        post :create, :employee => new_employee, :format => 'json'
+        puts response
+      end
     end
   end
+
 
 end

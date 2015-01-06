@@ -47,6 +47,14 @@ describe('ng-employees-mng',function() {
             "ranking" : 71
         });
 
+        httpBackend.whenPOST('/employees.json', {name: 'Lara', surname: 'Larsson', department: 'IT', ranking: 100}).respond(200, {
+            "id": 10,
+            "name": "Lara",
+            "surname": "Larsson",
+            "department": "IT",
+            "ranking": 100
+        });
+
         RestService = _RestService_;
         EmployeesCtrl = $controller('EmployeesCtrl', {
             '$scope' : scope,
@@ -81,6 +89,15 @@ describe('ng-employees-mng',function() {
             });
             httpBackend.flush();
             expect(record).toEqual(jasmine.objectContaining({ name : 'Erica', id: 2}));
+        });
+
+        it('should save 1 employee', function() {
+            var record = {};
+            RestService.save({ name: "Lara", surname: "Larsson", department: "IT", ranking: 100}, function(data) {
+                record = data;
+            });
+            httpBackend.flush();
+            expect(record).toEqual(jasmine.objectContaining({name: 'Lara', id: 10}));
         });
     });
 
@@ -126,8 +143,9 @@ describe('ng-employees-mng',function() {
                 "department" : "MARKETING",
                 "ranking" : 20
             }]);
+            scope.record = {id: 2, name : 'Elisabeth'};
 
-            scope.update({id: 2, name : 'Elisabeth'});
+            scope.update();
             httpBackend.flush();
 
             expect(scope.record).toEqual(jasmine.objectContaining({ name : 'Elisabeth'}));
