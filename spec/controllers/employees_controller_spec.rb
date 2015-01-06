@@ -46,9 +46,23 @@ describe EmployeesController do
 
     describe 'post #create' do
       it 'is successful' do
-        new_employee = {name: 'Lara', surname: 'Larsson', department: 'IT', ranking: 100}
-        post :create, :employee => new_employee, :format => 'json'
-        puts response
+        new_employee = {:name => 'Lara', :surname => 'Larsson', :ranking => 100}
+        post :create, new_employee, :format => 'json'
+        parse_one_record_json_and_check_it new_employee, response
+      end
+    end
+
+    describe 'get #show' do
+      it 'is successful' do
+        get :show, :id => @employees.first.id.to_s, :format => 'json'
+
+        expected_record = {}
+        @employees.first.instance_variables.each do |var|
+          if [:name,:surname,:ranking].include?(var)
+            expected_record[var] = @employees.first.instance_variable_get(var)
+          end
+        end
+        parse_one_record_json_and_check_it expected_record, response
       end
     end
   end
