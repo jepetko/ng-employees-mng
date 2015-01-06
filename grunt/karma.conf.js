@@ -13,13 +13,15 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             'node_modules/angular/angular.js',
+            'node_modules/angular-resource/angular-resource.js',
             'node_modules/angular-mocks/angular-mocks.js',
 
             //source code:
-            '../app/assets/javascripts/employees/**/*.js',
+            '../app/assets/javascripts/employees/*.js',
+            '../app/assets/templates/*.html',
 
             //tests:
-            '../karma_test/*.js'
+            '../karma_tests/*.js'
         ],
 
 
@@ -40,7 +42,16 @@ module.exports = function(config) {
 
         // generate js files from html templates
         preprocessors: {
-            'templates/*.html': 'ng-html2js'
+            '../app/assets/templates/*.html': 'ng-html2js'
+        },
+
+        ngHtml2JsPreprocessor: {
+            stripPrefix: '../app/assets/',
+            moduleName: 'templates',
+            cacheIdFromPath: function(filepath) {
+                var cacheID = /\w+\.html$/g.exec(filepath);
+                return cacheID[0];
+            }
         },
 
         port: 9876,
