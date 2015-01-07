@@ -17,4 +17,13 @@ module ControllerTestHelper
       expect(json[key.to_s]).to eq(val)
     end
   end
+
+  def convert_object_to_hash(record, properties)
+    hash = {}
+    properties.each do |key|
+      hash[key] = record.send(key)
+    end
+    p hash
+    hash
+  end
 end

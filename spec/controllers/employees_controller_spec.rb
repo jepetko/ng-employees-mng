@@ -56,12 +56,22 @@ describe EmployeesController do
       it 'is successful' do
         get :show, :id => @employees.first.id.to_s, :format => 'json'
 
-        expected_record = {}
-        @employees.first.instance_variables.each do |var|
-          if [:name,:surname,:ranking].include?(var)
-            expected_record[var] = @employees.first.instance_variable_get(var)
-          end
-        end
+        expected_record = convert_object_to_hash(@employees.first,[:name,:surname,:ranking])
+        parse_one_record_json_and_check_it expected_record, response
+      end
+    end
+
+    describe 'put #update' do
+      it 'is successful' do
+        record_to_be_updated = convert_object_to_hash(@employees.first,[:id,:name,:surname,:ranking])
+        record_to_be_updated[:surname] = 'Johansson'
+        record_to_be_updated[:ranking] = 99
+
+        p record_to_be_updated
+
+        put :update, record_to_be_updated, :format => 'json'
+        p response.body
+        expected_record = {surname: 'Johansson', ranking: 99}
         parse_one_record_json_and_check_it expected_record, response
       end
     end

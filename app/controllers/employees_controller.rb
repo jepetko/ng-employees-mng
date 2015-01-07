@@ -13,9 +13,6 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def new
-  end
-
   def create
     employee = Employee.new({:name => params['name'], :surname => params['surname'], :ranking => params['ranking']})
     employee.save!
@@ -24,10 +21,18 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
+    employee_param = params
+    employee = Employee.find_by_id(employee_param[:id])
+    employee_param.map do |k,v|
+      if employee.attribute_present?(k)
+        employee.send("#{k}=",v)
+      end
+    end
+    employee.save!
+    respond_to do |format|
+      format.json {render json: employee.reload}
+    end
   end
 
   def destroy
