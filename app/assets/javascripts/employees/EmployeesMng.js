@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    angular.module('ng-employees-mng', ['ngResource'])
+    angular.module('ng-employees-mng', ['ngResource', 'scope-aware'])
         .run(['$http', function($http) {
 
             var token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
@@ -17,7 +17,7 @@
                 }
             });
         }])
-        .controller('EmployeesCtrl', ['$scope', 'RestService', function($scope, RestService) {
+        .controller('EmployeesCtrl', ['$scope', 'RestService', 'Inspector', '$rootScope', function($scope, RestService, Inspector, $rootScope) {
             $scope.employees = [];
             $scope.record = {};
             $scope.template = { url : '/assets/employees_form.html'};
@@ -26,6 +26,8 @@
                 RestService.query(function(data) {
                     $scope.employees = data;
                 });
+
+                console.log(Inspector.inspect($rootScope));
             };
 
             $scope.get = function(id) {

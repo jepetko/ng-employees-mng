@@ -1,11 +1,13 @@
 describe('ng-employees-mng',function() {
 
     var scope, httpBackend, RestService, EmployeesCtrl, whenGetAll, whenGetAllDefaultResponse;
+    var Inspector;
 
     beforeEach(module('ng-employees-mng'));
     beforeEach(module('templates'));
+    beforeEach(module('scope-aware'));
 
-    beforeEach(inject(function($rootScope, $httpBackend, $controller, _RestService_) {
+    beforeEach(inject(function($rootScope, $httpBackend, $controller, _RestService_, _Inspector_) {
         scope = $rootScope.$new();
         httpBackend = $httpBackend;
 
@@ -60,6 +62,8 @@ describe('ng-employees-mng',function() {
             '$scope' : scope,
             'RestService' : RestService
         });
+
+        Inspector = _Inspector_;
 
     }));
 

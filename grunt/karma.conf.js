@@ -16,6 +16,7 @@ module.exports = function(config) {
             'node_modules/angular/angular.js',
             'node_modules/angular-resource/angular-resource.js',
             'node_modules/angular-mocks/angular-mocks.js',
+            'node_modules/ng-scope-aware/dist/ng-scope-aware.js',
 
             //source code:
             '../app/assets/javascripts/employees/*.js',
