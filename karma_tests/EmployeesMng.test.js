@@ -122,6 +122,18 @@ describe('ng-employees-mng',function() {
             expect(scope.record).toEqual(jasmine.objectContaining({ name : 'Erica'}));
         });
 
+        it('should be able to create a new employee', function() {
+
+            //default response for refreshing the list
+            whenGetAll.respond( whenGetAllDefaultResponse );
+
+            scope.record = {name: 'Lara', surname: 'Larsson', department: 'IT', ranking: 100};
+            scope.insert();
+            httpBackend.flush();
+
+            expect(scope.record).toEqual(jasmine.objectContaining({id: 10, name: 'Lara', surname: 'Larsson', ranking: 100}));
+        });
+
         it('should be able to update an employee and reload the list', function() {
 
             whenGetAll.respond( [{

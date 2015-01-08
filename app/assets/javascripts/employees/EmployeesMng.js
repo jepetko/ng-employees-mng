@@ -11,6 +11,9 @@
             return $resource('/employees/:id.json', null, {
                 update : {
                     method: 'PUT'
+                },
+                save : {
+                    method: 'POST'
                 }
             });
         }])
