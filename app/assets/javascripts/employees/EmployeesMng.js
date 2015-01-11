@@ -52,6 +52,10 @@
                 $scope.init();
             };
 
+            $scope.getBtnValue = function() {
+                return ($scope.record && $scope.record.id > 0) ? 'Update' : 'Insert';
+            };
+
             $scope.init();
         } ])
         .directive('numeric', function() {

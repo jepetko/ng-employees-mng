@@ -9,7 +9,7 @@
         <br>
         <label for="ranking">Score:</label>
         <input name="ranking" data-ng-model="record.ranking" required data-numeric/>
-        <input type="submit" value="Update" data-ng-disabled="empForm.$invalid">
+        <input type="submit" value="{{getBtnValue()}}" data-ng-disabled="empForm.$invalid">
 
         <h3>info:</h3>
 		<pre>

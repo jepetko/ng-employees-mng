@@ -2,6 +2,15 @@ describe('ng-employees-mng',function() {
 
     var scope, httpBackend, RestService, EmployeesCtrl, whenGetAll, whenGetAllDefaultResponse;
     var Inspector;
+    var grabSubmitBtn = function(form) {
+        var submit, inputs = form.find('input');
+        angular.forEach(inputs, function(input) {
+            if(input.type === 'submit') {
+                submit = input;
+            }
+        });
+        return submit;
+    };
 
     beforeEach(module('ng-employees-mng'));
     beforeEach(module('templates'));
@@ -175,7 +184,7 @@ describe('ng-employees-mng',function() {
     //Form validations:
     describe('EmployeesCtrl Form Behaviour', function() {
 
-        var element, controller;
+        var element;
 
         beforeEach(function() {
             whenGetAll.respond( whenGetAllDefaultResponse );
@@ -203,9 +212,7 @@ describe('ng-employees-mng',function() {
         it('should be valid when surname and name are not empty', (inject(function($filter) {
             scope.empForm.name.$setViewValue('Claudia');
             scope.empForm.surname.$setViewValue('Stadler');
-            scope.empForm.ranking.$setViewValue(50);
-
-            //console.log($filter('json')(scope.empForm.$error));
+            scope.empForm.ranking.$setViewValue(100);
 
             expect(scope.empForm.$valid).toBe(true);
         })));
@@ -218,13 +225,23 @@ describe('ng-employees-mng',function() {
 
             expect(scope.empForm.$valid).toBe(false);
 
-            var submit, inputs = element.find('input');
-            angular.forEach(inputs, function(input) {
-                if(input.type === 'submit') {
-                    submit = input;
-                }
-            });
+            var submit = grabSubmitBtn(element);
+            expect(submit).not.toBeUndefined();
             expect(submit.attributes['disabled'].value).toBe('disabled');
+        });
+
+        it('should insert a new record when no record is selected', function() {
+            scope.record = {};
+            scope.$digest();
+            var submit = grabSubmitBtn(element);
+            expect(submit.value).toBe('Insert');
+        });
+
+        it('should update a new record when no record is selected', function() {
+            scope.record = { id: 11 };
+            scope.$digest();
+            var submit = grabSubmitBtn(element);
+            expect(submit.value).toBe('Update');
         });
     });
 });
