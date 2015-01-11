@@ -31,7 +31,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="button" class="btn btn-primary" value="{{getBtnValue()}}" data-ng-disabled="empForm.$invalid">
+                    <input type="submit" class="btn btn-primary" value="{{getBtnValue()}}" data-ng-disabled="empForm.$invalid">
                     <h3>info:</h3>
                     <pre>
                         {{empForm.$error | json}}

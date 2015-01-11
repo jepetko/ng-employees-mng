@@ -3,7 +3,7 @@ describe('ng-employees-mng',function() {
     var scope, httpBackend, RestService, EmployeesCtrl, whenGetAll, whenGetAllDefaultResponse;
     var Inspector;
     var grabSubmitBtn = function(form) {
-        return $(form).find('input[type="button"]')[0];
+        return $(form).find('input[type="submit"]')[0];
     };
 
     beforeEach(module('ng-employees-mng'));
