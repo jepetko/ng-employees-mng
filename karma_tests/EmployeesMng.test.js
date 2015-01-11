@@ -3,13 +3,7 @@ describe('ng-employees-mng',function() {
     var scope, httpBackend, RestService, EmployeesCtrl, whenGetAll, whenGetAllDefaultResponse;
     var Inspector;
     var grabSubmitBtn = function(form) {
-        var submit, inputs = form.find('input');
-        angular.forEach(inputs, function(input) {
-            if(input.type === 'submit') {
-                submit = input;
-            }
-        });
-        return submit;
+        return $(form).find('input[type="button"]')[0];
     };
 
     beforeEach(module('ng-employees-mng'));
@@ -224,7 +218,6 @@ describe('ng-employees-mng',function() {
             scope.empForm.ranking.$setViewValue('bla');
 
             expect(scope.empForm.$valid).toBe(false);
-
             var submit = grabSubmitBtn(element);
             expect(submit).not.toBeUndefined();
             expect(submit.attributes['disabled'].value).toBe('disabled');

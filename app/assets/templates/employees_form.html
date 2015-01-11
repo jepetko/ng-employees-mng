@@ -1,21 +1,32 @@
-<div>
-    <h3>Currently in edit mode: {{record.id}}</h3>
-    <form name="empForm" data-ng-submit="action()">
-        <label for="name">Name:</label>
-        <input name="name" data-ng-model="record.name">
-        <br>
-        <label for="surname">Surname:</label>
-        <input name="surname" data-ng-model="record.surname">
-        <br>
-        <label for="ranking">Score:</label>
-        <input name="ranking" data-ng-model="record.ranking" required data-numeric/>
-        <input type="submit" value="{{getBtnValue()}}" data-ng-disabled="empForm.$invalid">
-
-        <h3>info:</h3>
-		<pre>
-			{{empForm.$error | json}}
-		</pre>
-        <h3>valid:</h3>
-        <pre>{{empForm.$valid}}</pre>
-    </form>
+<div class="modal fade" id="empFormDlg" tabindex="-1" role="dialog" aria-labelledby="empFormDlgLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="empFormDlgLabel">Employee #{{record.id}}</h4>
+            </div>
+            <form name="empForm" data-ng-submit="action()">
+                <div class="modal-body">
+                        <label for="name">Name:</label>
+                        <input name="name" data-ng-model="record.name">
+                        <br>
+                        <label for="surname">Surname:</label>
+                        <input name="surname" data-ng-model="record.surname">
+                        <br>
+                        <label for="ranking">Score:</label>
+                        <input name="ranking" data-ng-model="record.ranking" required data-numeric/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="button" class="btn btn-primary" value="{{getBtnValue()}}" data-ng-disabled="empForm.$invalid">
+                    <h3>info:</h3>
+                    <pre>
+                        {{empForm.$error | json}}
+                    </pre>
+                    <h3>valid:</h3>
+                    <pre>{{empForm.$valid}}</pre>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

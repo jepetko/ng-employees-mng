@@ -13,6 +13,7 @@ group :development, :test do
   gem 'spring'
 end
 gem 'bootstrap-sass'
+gem 'bootstrap-modal-rails'
 gem 'high_voltage'
 gem 'pg'
 gem 'simple_form'

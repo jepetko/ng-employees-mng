@@ -27,7 +27,7 @@
                     $scope.employees = data;
                 });
 
-                console.log(Inspector.inspect($rootScope));
+                //console.log(Inspector.inspect($rootScope));
             };
 
             $scope.get = function(id) {
