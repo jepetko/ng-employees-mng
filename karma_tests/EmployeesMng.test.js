@@ -169,7 +169,7 @@ describe('ng-employees-mng',function() {
 
             expect(scope.record).toEqual(jasmine.objectContaining({ name : 'Elisabeth'}));
 
-            scope.init();
+            scope.refresh();
             expect(scope.employees[1]).toEqual(jasmine.objectContaining({ name : 'Elisabeth'}));
         });
 

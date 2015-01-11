@@ -18,11 +18,12 @@
             });
         }])
         .controller('EmployeesCtrl', ['$scope', 'RestService', 'Inspector', '$rootScope', function($scope, RestService, Inspector, $rootScope) {
+            $scope.dlgID = '#empFormDlg';
             $scope.employees = [];
             $scope.record = {};
             $scope.template = { url : '/assets/employees_form.html'};
 
-            $scope.init = function() {
+            $scope.refresh = function() {
                 RestService.query(function(data) {
                     $scope.employees = data;
                 });
@@ -41,17 +42,17 @@
                     $scope.insert();
                 }
                 //decouple this...
-                $('#empFormDlg').modal('hide');
+                $($scope.dlgID).modal('hide');
             };
 
             $scope.update = function() {
                 $scope.record = RestService.update({id : $scope.record.id}, $scope.record);
-                $scope.init();
+                $scope.refresh();
             };
 
             $scope.insert = function() {
                 $scope.record = RestService.save($scope.record);
-                $scope.init();
+                $scope.refresh();
             };
 
             $scope.getBtnValue = function() {
@@ -62,7 +63,7 @@
                 $scope.record = {};
             };
 
-            $scope.init();
+            $scope.refresh();
         } ])
         .directive('numeric', function() {
             return {
