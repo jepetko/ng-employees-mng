@@ -56,6 +56,10 @@
                 return ($scope.record && $scope.record.id > 0) ? 'Update' : 'Insert';
             };
 
+            $scope.clear = function() {
+                $scope.record = {};
+            };
+
             $scope.init();
         } ])
         .directive('numeric', function() {

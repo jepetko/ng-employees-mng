@@ -223,18 +223,31 @@ describe('ng-employees-mng',function() {
             expect(submit.attributes['disabled'].value).toBe('disabled');
         });
 
-        it('should insert a new record when no record is selected', function() {
+        it('should insert a new record if no record is selected', function() {
             scope.record = {};
             scope.$digest();
             var submit = grabSubmitBtn(element);
             expect(submit.value).toBe('Insert');
         });
 
-        it('should update a new record when no record is selected', function() {
+        it('should update a new record if no record is selected', function() {
             scope.record = { id: 11 };
             scope.$digest();
             var submit = grabSubmitBtn(element);
             expect(submit.value).toBe('Update');
+        });
+
+        it('should show an empty dialog if current record is cleared', function() {
+            scope.record = { id: 11, name: 'Hansi' };
+            scope.$digest();
+            expect(scope.record).toEqual({ id: 11, name: 'Hansi' });
+
+            scope.clear();
+            scope.$digest();
+
+            expect(scope.record).toEqual({});
+            var submit = grabSubmitBtn(element);
+            expect(submit.value).toBe('Insert');
         });
     });
 });
