@@ -94,5 +94,13 @@
                     });
                 }
             };
+        })
+        .directive('revalidate', function() {
+            return {
+                require: 'ngModel',
+                link: function(scope, element, attrs, ngModel)  {
+                    console.log(ngModel);
+                }
+            }
         });
 })();

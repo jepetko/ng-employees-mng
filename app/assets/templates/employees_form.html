@@ -6,6 +6,7 @@
                 <h4 class="modal-title" id="empFormDlgLabel">Employee #{{record.id}}</h4>
             </div>
             <form name="empForm" data-ng-submit="action()">
+                <input type="input" data-ng-model="record.x" data-revalidate>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Name:</label>
