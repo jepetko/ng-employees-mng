@@ -40,6 +40,8 @@
                 } else {
                     $scope.insert();
                 }
+                //decouple this...
+                $('#empFormDlg').modal('hide');
             };
 
             $scope.update = function() {
