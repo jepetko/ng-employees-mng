@@ -65,8 +65,7 @@
 
                     var pattern = new RegExp('[0-9]+', 'g');
 
-                    //user inserts a value
-                    ngModel.$parsers.unshift(function(value) {
+                    var validate = function(value) {
                         var ok = true;
                         if(typeof value !== 'undefined') {
                             var str = "" + value;
@@ -75,18 +74,16 @@
                         }
                         ngModel.$setValidity('numeric', ok);
                         return value;
+                    };
+
+                    //user inserts a value
+                    ngModel.$parsers.unshift(function(value) {
+                        return validate(value);
                     });
 
                     //value comes from the model
                     ngModel.$formatters.unshift(function(value) {
-                        var ok = true;
-                        if(typeof value !== 'undefined') {
-                            var str = "" + value;
-                            var result = str.match(pattern);
-                            ok = (result !== null);
-                        }
-                        ngModel.$setValidity('numeric',ok);
-                        return value;
+                        return validate(value);
                     });
                 }
             };
