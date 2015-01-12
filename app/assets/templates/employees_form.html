@@ -33,13 +33,11 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <input type="submit" class="btn btn-primary" value="{{getBtnValue()}}" data-ng-disabled="empForm.$invalid">
-                    <h3>info:</h3>
-                    <pre>
-                        {{empForm.$error | json}}
-                    </pre>
-                    <h3>valid:</h3>
-                    <pre>{{empForm.$valid}}</pre>
                 </div>
+                <h3>info:</h3>
+                    <pre>{{empForm.$error | json}}</pre>
+                <h3>valid:</h3>
+                <pre>{{empForm.$valid}}</pre>
             </form>
         </div>
     </div>
