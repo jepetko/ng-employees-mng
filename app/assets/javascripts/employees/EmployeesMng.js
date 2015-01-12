@@ -99,7 +99,13 @@
             return {
                 require: 'ngModel',
                 link: function(scope, element, attrs, ngModel)  {
-                    console.log(ngModel);
+                    if(attrs.watch) {
+                        scope.$watch(attrs.watch, function() {
+                            if(scope[attrs.form]) {
+                                scope[attrs.form].$commitViewValue(true);
+                            }
+                        }, true);
+                    }
                 }
             }
         });
