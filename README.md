@@ -11,6 +11,7 @@ Rails &lt;3 AngularJS
 $ mkdir ng-employees-mng
 $ cd ng-employees-mng
 $ rvm use ruby-2.1.2@ng-employees-mng --ruby-version --create
+# this will create .ruby-version and .ruby-gemset
 $ gem install rails
 $ gem install rails_apps_composer
 $ rails_apps_composer new . -r core
